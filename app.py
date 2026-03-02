@@ -92,7 +92,7 @@ elif page == "📩 Contact":
 
     This project is developed for academic and learning purposes.
 
-    📧 Email: your_email@example.com  
+    📧 Email: chetan_sharma@gmail.com  
     🌐 GitHub: Your GitHub Profile Link
     """)
 
