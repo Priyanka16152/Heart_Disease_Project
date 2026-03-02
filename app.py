@@ -12,58 +12,92 @@ st.set_page_config(
 # ------------------ LOAD MODEL ------------------
 model = pickle.load(open("heart_model.pkl", "rb"))
 
-# ------------------ CUSTOM NAVBAR STYLE ------------------
-st.markdown("""
-    <style>
-    .nav-button {
-        background-color: #0E1117;
-        color: white;
-        border: none;
-        padding: 10px 30px;
-        margin: 5px;
-        font-size: 18px;
-        border-radius: 8px;
-        cursor: pointer;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
 # ------------------ SESSION STATE ------------------
 if "page" not in st.session_state:
     st.session_state.page = "Home"
 
 # ------------------ TOP NAVBAR ------------------
-col1, col2, col3 = st.columns([1,2,1])
+col1, col2, col3, col4, col5 = st.columns(5)
+
+with col1:
+    if st.button("🏠 Home"):
+        st.session_state.page = "Home"
 
 with col2:
-    nav1, nav2 = st.columns(2)
-    with nav1:
-        if st.button("🏠 Home"):
-            st.session_state.page = "Home"
-    with nav2:
-        if st.button("🔍 Prediction"):
-            st.session_state.page = "Prediction"
+    if st.button("📖 About"):
+        st.session_state.page = "About"
+
+with col3:
+    if st.button("🔍 Prediction"):
+        st.session_state.page = "Prediction"
+
+with col4:
+    if st.button("🤖 Model Info"):
+        st.session_state.page = "Model"
+
+with col5:
+    if st.button("📩 Contact"):
+        st.session_state.page = "Contact"
 
 st.markdown("---")
 
 # ------------------ HOME PAGE ------------------
 if st.session_state.page == "Home":
     st.title("❤️ Heart Disease Prediction System")
-
     st.write("""
-    ### 🩺 About the Project
+    Welcome to the Heart Disease Prediction Web Application.
     
-    This application predicts the presence of heart disease 
-    using a Machine Learning model trained on medical data.
+    This system uses Machine Learning to predict the risk of heart disease 
+    based on medical attributes.
     
-    The system analyzes 13 clinical features and provides 
-    an instant prediction result.
-    
-    ### 🎯 Objective
-    To assist in early risk detection and promote preventive healthcare.
+    Early detection can help in preventive healthcare.
     """)
 
-    st.success("Click on Prediction to check heart disease risk.")
+# ------------------ ABOUT PAGE ------------------
+elif st.session_state.page == "About":
+    st.title("📖 About the Project")
+    st.write("""
+    This project is developed using Machine Learning techniques.
+    
+    Dataset Used:
+    - UCI Heart Disease Dataset
+    
+    Objective:
+    - Predict presence of heart disease
+    - Assist in early risk detection
+    
+    Technologies Used:
+    - Python
+    - Scikit-learn
+    - Pandas & NumPy
+    - Streamlit
+    """)
+
+# ------------------ MODEL INFO PAGE ------------------
+elif st.session_state.page == "Model":
+    st.title("🤖 Model Information")
+    st.write("""
+    Algorithm Used: Random Forest Classifier
+    
+    Why Random Forest?
+    - High accuracy
+    - Handles non-linear data
+    - Reduces overfitting
+    
+    Model trained on 13 medical features.
+    """)
+
+# ------------------ CONTACT PAGE ------------------
+elif st.session_state.page == "Contact":
+    st.title("📩 Contact")
+    st.write("""
+    Developer: Priyanka
+    
+    This project is created for academic and learning purposes.
+    
+    For queries or collaboration:
+    📧 your_email@example.com
+    """)
 
 # ------------------ PREDICTION PAGE ------------------
 elif st.session_state.page == "Prediction":
