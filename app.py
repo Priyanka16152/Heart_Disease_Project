@@ -12,42 +12,63 @@ st.set_page_config(
 # ------------------ LOAD MODEL ------------------
 model = pickle.load(open("heart_model.pkl", "rb"))
 
-# ------------------ SIDEBAR NAVIGATION ------------------
-st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Home", "Prediction"])
+# ------------------ CUSTOM NAVBAR STYLE ------------------
+st.markdown("""
+    <style>
+    .nav-button {
+        background-color: #0E1117;
+        color: white;
+        border: none;
+        padding: 10px 30px;
+        margin: 5px;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# ------------------ SESSION STATE ------------------
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
+
+# ------------------ TOP NAVBAR ------------------
+col1, col2, col3 = st.columns([1,2,1])
+
+with col2:
+    nav1, nav2 = st.columns(2)
+    with nav1:
+        if st.button("🏠 Home"):
+            st.session_state.page = "Home"
+    with nav2:
+        if st.button("🔍 Prediction"):
+            st.session_state.page = "Prediction"
+
+st.markdown("---")
 
 # ------------------ HOME PAGE ------------------
-if page == "Home":
+if st.session_state.page == "Home":
     st.title("❤️ Heart Disease Prediction System")
-    st.markdown("---")
 
     st.write("""
-    ### 🩺 Project Overview
+    ### 🩺 About the Project
     
     This application predicts the presence of heart disease 
-    using Machine Learning techniques.
+    using a Machine Learning model trained on medical data.
     
-    The model is trained using medical attributes such as:
-    - Age
-    - Blood Pressure
-    - Cholesterol
-    - Chest Pain Type
-    - Maximum Heart Rate
+    The system analyzes 13 clinical features and provides 
+    an instant prediction result.
     
     ### 🎯 Objective
-    To assist in early detection of heart disease risk 
-    and support medical decision-making.
+    To assist in early risk detection and promote preventive healthcare.
     """)
 
-    st.image("https://cdn-icons-png.flaticon.com/512/2966/2966481.png", width=150)
-
-    st.success("Use the sidebar to navigate to the Prediction page.")
+    st.success("Click on Prediction to check heart disease risk.")
 
 # ------------------ PREDICTION PAGE ------------------
-elif page == "Prediction":
+elif st.session_state.page == "Prediction":
 
     st.title("🔍 Heart Disease Prediction")
-    st.markdown("---")
 
     col1, col2 = st.columns(2)
 
@@ -59,14 +80,14 @@ elif page == "Prediction":
         chol = st.number_input("Serum Cholesterol")
 
     with col2:
-        fbs = st.selectbox("Fasting Blood Sugar > 120 mg/dl (1 = Yes, 0 = No)", [0, 1])
-        restecg = st.selectbox("Resting ECG Results (0-2)", [0, 1, 2])
-        thalach = st.number_input("Maximum Heart Rate Achieved")
-        exang = st.selectbox("Exercise Induced Angina (1 = Yes, 0 = No)", [0, 1])
+        fbs = st.selectbox("Fasting Blood Sugar > 120 mg/dl", [0, 1])
+        restecg = st.selectbox("Resting ECG (0-2)", [0, 1, 2])
+        thalach = st.number_input("Maximum Heart Rate")
+        exang = st.selectbox("Exercise Induced Angina", [0, 1])
         oldpeak = st.number_input("ST Depression")
 
     slope = st.selectbox("Slope (0-2)", [0, 1, 2])
-    ca = st.selectbox("Number of Major Vessels (0-3)", [0, 1, 2, 3])
+    ca = st.selectbox("Major Vessels (0-3)", [0, 1, 2, 3])
     thal = st.selectbox("Thalassemia (0-3)", [0, 1, 2, 3])
 
     if st.button("Predict"):
