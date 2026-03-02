@@ -22,7 +22,7 @@ page = st.sidebar.radio(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.info("Developed using Machine Learning & Streamlit")
+st.sidebar.info("May you live a long life")
 
 # ---------------- HOME PAGE ----------------
 if page == "🏠 Home":
