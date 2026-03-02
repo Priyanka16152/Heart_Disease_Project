@@ -18,7 +18,7 @@ st.sidebar.markdown("---")
 
 page = st.sidebar.radio(
     "Navigation",
-    ["🏠 Home", "📖 About Project", "🔍 Prediction", "🤖 Model Info", "📩 Contact"]
+    ["🏠 Home", "📖 About Project", "🔍 Prediction", "📩 Contact"]
 )
 
 st.sidebar.markdown("---")
@@ -65,25 +65,6 @@ elif page == "📖 About Project":
     - Streamlit
     """)
 
-# ---------------- MODEL INFO PAGE ----------------
-elif page == "🤖 Model Info":
-    st.title("🤖 Model Information")
-    st.markdown("---")
-
-    st.write("""
-    ### Algorithm Used:
-    Random Forest Classifier
-
-    ### Why Random Forest?
-    - High prediction accuracy
-    - Handles non-linear relationships
-    - Reduces overfitting
-    - Works well with structured medical data
-
-    The model is trained on 13 clinical features 
-    such as age, cholesterol, blood pressure, 
-    chest pain type, and more.
-    """)
 
 # ---------------- CONTACT PAGE ----------------
 elif page == "📩 Contact":
@@ -91,12 +72,11 @@ elif page == "📩 Contact":
     st.markdown("---")
 
     st.write("""
-    👩‍💻 Developer: Priyanka  
+    👩‍💻 Developer: Og's 
 
     This project is developed for academic and learning purposes.
 
-    📧 Email: your_email@example.com  
-    🌐 GitHub: Your GitHub Profile Link
+    📧 Email: chetan_sharma@gmail.com  
     """)
 
 # ---------------- PREDICTION PAGE ----------------
