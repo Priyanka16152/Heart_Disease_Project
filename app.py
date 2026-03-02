@@ -22,7 +22,7 @@ page = st.sidebar.radio(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.info("May you live a long life")
+st.sidebar.info("May you live a long life!")
 
 # ---------------- HOME PAGE ----------------
 if page == "🏠 Home":
@@ -58,12 +58,6 @@ elif page == "📖 About Project":
     - Assist in early diagnosis
     - Support medical decision-making
 
-    ### 🛠 Technologies Used
-    - Python
-    - Pandas & NumPy
-    - Scikit-learn
-    - Streamlit
-    """)
 
 
 # ---------------- CONTACT PAGE ----------------
