@@ -1,165 +1,135 @@
 import streamlit as st
-import sqlite3
 import pickle
 import numpy as np
 
-# ---------------------------
-# PAGE CONFIG
-# ---------------------------
-st.set_page_config(page_title="Heart Disease Prediction", layout="wide")
-
-# ---------------------------
-# DATABASE CONNECTION
-# ---------------------------
-conn = sqlite3.connect("database.db", check_same_thread=False)
-c = conn.cursor()
-
-# Create tables
-c.execute("""
-CREATE TABLE IF NOT EXISTS users(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT,
-    password TEXT
+# ---------------- PAGE CONFIG ----------------
+st.set_page_config(
+    page_title="Heart Disease Prediction",
+    page_icon="❤️",
+    layout="wide"
 )
-""")
 
-c.execute("""
-CREATE TABLE IF NOT EXISTS predictions(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT,
-    result TEXT
-)
-""")
-
-conn.commit()
-
-# ---------------------------
-# LOAD MODEL
-# ---------------------------
+# ---------------- LOAD MODEL ----------------
 model = pickle.load(open("heart_model.pkl", "rb"))
 
-# ---------------------------
-# SIDEBAR MENU
-# ---------------------------
-menu = ["Home", "Login", "Signup"]
-choice = st.sidebar.selectbox("Navigation", menu)
+# ---------------- SIDEBAR ----------------
+st.sidebar.title("❤️ Heart Disease App")
+st.sidebar.markdown("---")
 
-# ---------------------------
-# HOME PAGE
-# ---------------------------
-if choice == "Home":
+page = st.sidebar.radio(
+    "Navigation",
+    ["🏠 Home", "📖 About Project", "🔍 Prediction", "🤖 Model Info", "📩 Contact"]
+)
+
+st.sidebar.markdown("---")
+st.sidebar.info("Developed using Machine Learning & Streamlit")
+
+# ---------------- HOME PAGE ----------------
+if page == "🏠 Home":
     st.title("❤️ Heart Disease Prediction System")
+    st.markdown("---")
+
     st.write("""
-    This project predicts the risk of heart disease using Machine Learning.
-    
-    🔹 Built with Streamlit  
-    🔹 Model: Logistic Regression / Random Forest  
-    🔹 Backend: SQLite Database
+    Welcome to the Heart Disease Prediction Web Application.
+
+    This system uses Machine Learning to analyze medical parameters 
+    and predict the risk of heart disease.
+
+    Early detection plays a crucial role in preventive healthcare 
+    and timely medical intervention.
     """)
 
-# ---------------------------
-# SIGNUP PAGE
-# ---------------------------
-elif choice == "Signup":
-    st.subheader("Create New Account")
+    st.success("Use the left sidebar to navigate through the application.")
 
-    new_user = st.text_input("Username")
-    new_pass = st.text_input("Password", type="password")
+# ---------------- ABOUT PAGE ----------------
+elif page == "📖 About Project":
+    st.title("📖 About the Project")
+    st.markdown("---")
 
-    if st.button("Signup"):
-        c.execute("INSERT INTO users(username,password) VALUES (?,?)",
-                  (new_user, new_pass))
-        conn.commit()
-        st.success("Account Created Successfully!")
+    st.write("""
+    ### 📊 Dataset Used
+    UCI Heart Disease Dataset
 
-# ---------------------------
-# LOGIN PAGE
-# ---------------------------
-elif choice == "Login":
-    st.subheader("Login")
+    ### 🎯 Objective
+    - Predict presence of heart disease
+    - Assist in early diagnosis
+    - Support medical decision-making
 
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    ### 🛠 Technologies Used
+    - Python
+    - Pandas & NumPy
+    - Scikit-learn
+    - Streamlit
+    """)
 
-    if st.button("Login"):
-        c.execute("SELECT * FROM users WHERE username=? AND password=?",
-                  (username, password))
-        data = c.fetchall()
+# ---------------- MODEL INFO PAGE ----------------
+elif page == "🤖 Model Info":
+    st.title("🤖 Model Information")
+    st.markdown("---")
 
-        if data:
-            st.success("Logged In Successfully!")
-            st.session_state["user"] = username
-        else:
-            st.error("Invalid Credentials")
+    st.write("""
+    ### Algorithm Used:
+    Random Forest Classifier
 
-# ---------------------------
-# AFTER LOGIN
-# ---------------------------
-if "user" in st.session_state:
+    ### Why Random Forest?
+    - High prediction accuracy
+    - Handles non-linear relationships
+    - Reduces overfitting
+    - Works well with structured medical data
 
-    st.sidebar.success(f"Logged in as {st.session_state['user']}")
-    page = st.sidebar.radio("Go To", ["Prediction", "My History", "Logout"])
+    The model is trained on 13 clinical features 
+    such as age, cholesterol, blood pressure, 
+    chest pain type, and more.
+    """)
 
-    # ---------------------------
-    # PREDICTION PAGE
-    # ---------------------------
-    if page == "Prediction":
+# ---------------- CONTACT PAGE ----------------
+elif page == "📩 Contact":
+    st.title("📩 Contact Information")
+    st.markdown("---")
 
-        st.subheader("Enter Patient Details")
+    st.write("""
+    👩‍💻 Developer: Priyanka  
 
+    This project is developed for academic and learning purposes.
+
+    📧 Email: your_email@example.com  
+    🌐 GitHub: Your GitHub Profile Link
+    """)
+
+# ---------------- PREDICTION PAGE ----------------
+elif page == "🔍 Prediction":
+
+    st.title("🔍 Heart Disease Prediction")
+    st.markdown("---")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
         age = st.number_input("Age", 1, 120)
-        sex = st.selectbox("Sex (1 = Male, 0 = Female)", [0, 1])
-        cp = st.number_input("Chest Pain Type", 0, 3)
+        sex = st.selectbox("Sex (0 = Female, 1 = Male)", [0, 1])
+        cp = st.selectbox("Chest Pain Type (0-3)", [0, 1, 2, 3])
         trestbps = st.number_input("Resting Blood Pressure")
-        chol = st.number_input("Cholesterol")
-        fbs = st.selectbox("Fasting Blood Sugar > 120 (1 = Yes, 0 = No)", [0, 1])
-        restecg = st.number_input("Rest ECG", 0, 2)
-        thalach = st.number_input("Max Heart Rate")
+        chol = st.number_input("Serum Cholesterol")
+
+    with col2:
+        fbs = st.selectbox("Fasting Blood Sugar > 120 mg/dl", [0, 1])
+        restecg = st.selectbox("Resting ECG (0-2)", [0, 1, 2])
+        thalach = st.number_input("Maximum Heart Rate")
         exang = st.selectbox("Exercise Induced Angina", [0, 1])
-        oldpeak = st.number_input("Oldpeak")
-        slope = st.number_input("Slope", 0, 2)
-        ca = st.number_input("Number of Major Vessels", 0, 4)
-        thal = st.number_input("Thal", 0, 3)
+        oldpeak = st.number_input("ST Depression")
 
-        if st.button("Predict"):
-            input_data = np.array([[age, sex, cp, trestbps, chol, fbs,
-                                    restecg, thalach, exang, oldpeak,
-                                    slope, ca, thal]])
+    slope = st.selectbox("Slope (0-2)", [0, 1, 2])
+    ca = st.selectbox("Major Vessels (0-3)", [0, 1, 2, 3])
+    thal = st.selectbox("Thalassemia (0-3)", [0, 1, 2, 3])
 
-            prediction = model.predict(input_data)
+    if st.button("Predict"):
+        input_data = np.array([[age, sex, cp, trestbps, chol, fbs,
+                                restecg, thalach, exang, oldpeak,
+                                slope, ca, thal]])
 
-            if prediction[0] == 1:
-                result = "High Risk of Heart Disease"
-                st.error(result)
-            else:
-                result = "Low Risk of Heart Disease"
-                st.success(result)
+        prediction = model.predict(input_data)
 
-            # Save prediction
-            c.execute("INSERT INTO predictions(username,result) VALUES (?,?)",
-                      (st.session_state["user"], result))
-            conn.commit()
-
-    # ---------------------------
-    # HISTORY PAGE
-    # ---------------------------
-    elif page == "My History":
-
-        st.subheader("My Prediction History")
-
-        c.execute("SELECT result FROM predictions WHERE username=?",
-                  (st.session_state["user"],))
-        data = c.fetchall()
-
-        if data:
-            for row in data:
-                st.write("•", row[0])
+        if prediction[0] == 1:
+            st.error("⚠ High Risk of Heart Disease")
         else:
-            st.info("No predictions yet.")
-
-    # ---------------------------
-    # LOGOUT
-    # ---------------------------
-    elif page == "Logout":
-        st.session_state.clear()
-        st.success("Logged Out Successfully")
+            st.success("✅ Low Risk of Heart Disease")
