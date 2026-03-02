@@ -18,7 +18,7 @@ st.sidebar.markdown("---")
 
 page = st.sidebar.radio(
     "Navigation",
-    ["🏠 Home", "📖 About Project", "🔍 Prediction", "📩 Contact"]
+    ["🏠 Home", "📖 About Project", "🔍 Prediction"]
 )
 
 st.sidebar.markdown("---")
