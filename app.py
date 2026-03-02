@@ -30,13 +30,16 @@ if page == "🏠 Home":
     st.markdown("---")
 
     st.write("""
-    Welcome to the Heart Disease Prediction Web Application.
+    Welcome to the Heart Disease Prediction .
 
-    This system uses Machine Learning to analyze medical parameters 
-    and predict the risk of heart disease.
+    Early detection of heart disease can:
+- Help prevent serious complications
+- Support timely medical intervention
+- Improve overall patient outcomes
+- Encourage preventive healthcare decisions
 
-    Early detection plays a crucial role in preventive healthcare 
-    and timely medical intervention.
+---
+
     """)
 
     st.success("Use the left sidebar to navigate through the application.")
