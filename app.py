@@ -96,7 +96,7 @@ elif st.session_state.page == "Contact":
     This project is created for academic and learning purposes.
     
     For queries or collaboration:
-    📧 your_email@example.com
+    📧 chetan_sharma@gmail.com
     """)
 
 # ------------------ PREDICTION PAGE ------------------
