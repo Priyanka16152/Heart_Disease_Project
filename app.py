@@ -91,7 +91,7 @@ elif st.session_state.page == "Model":
 elif st.session_state.page == "Contact":
     st.title("📩 Contact")
     st.write("""
-    Developer: Priyanka
+    Developer: Og's 
     
     This project is created for academic and learning purposes.
     
