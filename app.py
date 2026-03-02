@@ -49,19 +49,17 @@ elif page == "📖 About Project":
     st.markdown("---")
 
     st.write("""
-    ### 📊 Dataset Used
-    UCI Heart Disease Dataset
+    This platform analyzes medical inputs such as age, blood pressure, cholesterol level, 
+heart rate, and other important health indicators to generate a predictive result.
 
-    ### 🎯 Objective
-    - Predict presence of heart disease
-    - Assist in early diagnosis
-    - Support medical decision-making
+The objective of this system is to support early detection and promote 
+preventive healthcare awareness through data-driven insights.
 
-    ### 🛠 Technologies Used
-    - Python
-    - Pandas & NumPy
-    - Scikit-learn
-    - Streamlit
+### Key Highlights:
+- AI-Based Risk Assessment
+- Prediction History Tracking
+- User-Friendly Interface
+- If there are high risk then consult the doctor
     """)
 
 # ---------------- MODEL INFO PAGE ----------------
