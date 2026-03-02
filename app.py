@@ -58,7 +58,8 @@ elif page == "📖 About Project":
     - Assist in early diagnosis
     - Support medical decision-making
 
-
+***
+)
 
 # ---------------- CONTACT PAGE ----------------
 elif page == "📩 Contact":
