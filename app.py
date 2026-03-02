@@ -2,107 +2,105 @@ import streamlit as st
 import pickle
 import numpy as np
 
-# ------------------ PAGE CONFIG ------------------
+# ---------------- PAGE CONFIG ----------------
 st.set_page_config(
     page_title="Heart Disease Prediction",
     page_icon="❤️",
     layout="wide"
 )
 
-# ------------------ LOAD MODEL ------------------
+# ---------------- LOAD MODEL ----------------
 model = pickle.load(open("heart_model.pkl", "rb"))
 
-# ------------------ SESSION STATE ------------------
-if "page" not in st.session_state:
-    st.session_state.page = "Home"
+# ---------------- SIDEBAR ----------------
+st.sidebar.title("❤️ Heart Disease App")
+st.sidebar.markdown("---")
 
-# ------------------ TOP NAVBAR ------------------
-col1, col2, col3, col4, col5 = st.columns(5)
+page = st.sidebar.radio(
+    "Navigation",
+    ["🏠 Home", "📖 About Project", "🔍 Prediction", "🤖 Model Info", "📩 Contact"]
+)
 
-with col1:
-    if st.button("🏠 Home"):
-        st.session_state.page = "Home"
+st.sidebar.markdown("---")
+st.sidebar.info("Developed using Machine Learning & Streamlit")
 
-with col2:
-    if st.button("📖 About"):
-        st.session_state.page = "About"
-
-with col3:
-    if st.button("🔍 Prediction"):
-        st.session_state.page = "Prediction"
-
-with col4:
-    if st.button("🤖 Model Info"):
-        st.session_state.page = "Model"
-
-with col5:
-    if st.button("📩 Contact"):
-        st.session_state.page = "Contact"
-
-st.markdown("---")
-
-# ------------------ HOME PAGE ------------------
-if st.session_state.page == "Home":
+# ---------------- HOME PAGE ----------------
+if page == "🏠 Home":
     st.title("❤️ Heart Disease Prediction System")
+    st.markdown("---")
+
     st.write("""
     Welcome to the Heart Disease Prediction Web Application.
-    
-    This system uses Machine Learning to predict the risk of heart disease 
-    based on medical attributes.
-    
-    Early detection can help in preventive healthcare.
+
+    This system uses Machine Learning to analyze medical parameters 
+    and predict the risk of heart disease.
+
+    Early detection plays a crucial role in preventive healthcare 
+    and timely medical intervention.
     """)
 
-# ------------------ ABOUT PAGE ------------------
-elif st.session_state.page == "About":
+    st.success("Use the left sidebar to navigate through the application.")
+
+# ---------------- ABOUT PAGE ----------------
+elif page == "📖 About Project":
     st.title("📖 About the Project")
+    st.markdown("---")
+
     st.write("""
-    This project is developed using Machine Learning techniques.
-    
-    Dataset Used:
-    - UCI Heart Disease Dataset
-    
-    Objective:
+    ### 📊 Dataset Used
+    UCI Heart Disease Dataset
+
+    ### 🎯 Objective
     - Predict presence of heart disease
-    - Assist in early risk detection
-    
-    Technologies Used:
+    - Assist in early diagnosis
+    - Support medical decision-making
+
+    ### 🛠 Technologies Used
     - Python
-    - Scikit-learn
     - Pandas & NumPy
+    - Scikit-learn
     - Streamlit
     """)
 
-# ------------------ MODEL INFO PAGE ------------------
-elif st.session_state.page == "Model":
+# ---------------- MODEL INFO PAGE ----------------
+elif page == "🤖 Model Info":
     st.title("🤖 Model Information")
+    st.markdown("---")
+
     st.write("""
-    Algorithm Used: Random Forest Classifier
-    
-    Why Random Forest?
-    - High accuracy
-    - Handles non-linear data
+    ### Algorithm Used:
+    Random Forest Classifier
+
+    ### Why Random Forest?
+    - High prediction accuracy
+    - Handles non-linear relationships
     - Reduces overfitting
-    
-    Model trained on 13 medical features.
+    - Works well with structured medical data
+
+    The model is trained on 13 clinical features 
+    such as age, cholesterol, blood pressure, 
+    chest pain type, and more.
     """)
 
-# ------------------ CONTACT PAGE ------------------
-elif st.session_state.page == "Contact":
-    st.title("📩 Contact")
+# ---------------- CONTACT PAGE ----------------
+elif page == "📩 Contact":
+    st.title("📩 Contact Information")
+    st.markdown("---")
+
     st.write("""
-    Developer: Og's 
-    
-    This project is created for academic and learning purposes.
-    
-    For queries or collaboration:
-    📧 chetan_sharma@gmail.com
+    👩‍💻 Developer: Priyanka  
+
+    This project is developed for academic and learning purposes.
+
+    📧 Email: your_email@example.com  
+    🌐 GitHub: Your GitHub Profile Link
     """)
 
-# ------------------ PREDICTION PAGE ------------------
-elif st.session_state.page == "Prediction":
+# ---------------- PREDICTION PAGE ----------------
+elif page == "🔍 Prediction":
 
     st.title("🔍 Heart Disease Prediction")
+    st.markdown("---")
 
     col1, col2 = st.columns(2)
 
