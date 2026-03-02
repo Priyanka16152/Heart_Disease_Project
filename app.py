@@ -88,11 +88,11 @@ elif page == "📩 Contact":
     st.markdown("---")
 
     st.write("""
-    👩‍💻 Developer: Priyanka  
+    👩‍💻 Developer: Og's
 
     This project is developed for academic and learning purposes.
 
-    📧 Email: your_email@example.com  
+    📧 Email: chetan_sharma@gmail.com 
     🌐 GitHub: Your GitHub Profile Link
     """)
 
