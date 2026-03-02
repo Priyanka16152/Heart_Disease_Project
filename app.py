@@ -61,19 +61,6 @@ elif page == "📖 About Project":
 ***
 )
 
-# ---------------- CONTACT PAGE ----------------
-elif page == "📩 Contact":
-    st.title("📩 Contact Information")
-    st.markdown("---")
-
-    st.write("""
-    👩‍💻 Developer: Og's 
-
-    This project is developed for academic and learning purposes.
-
-    📧 Email: chetan_sharma@gmail.com  
-    """)
-
 # ---------------- PREDICTION PAGE ----------------
 elif page == "🔍 Prediction":
 
