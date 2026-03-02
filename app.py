@@ -36,7 +36,7 @@ conn.commit()
 # ---------------------------
 # LOAD MODEL
 # ---------------------------
-model = pickle.load(open("model.pkl", "rb"))
+model = pickle.load(open("heart_model.pkl", "rb"))
 
 # ---------------------------
 # SIDEBAR MENU
