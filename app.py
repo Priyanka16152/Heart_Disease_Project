@@ -18,11 +18,11 @@ st.sidebar.markdown("---")
 
 page = st.sidebar.radio(
     "Navigation",
-    ["🏠 Home", "📖 About Project", "🔍 Prediction"]
+    ["🏠 Home", "📖 About Project", "🔍 Prediction", "📩 Contact"]
 )
 
 st.sidebar.markdown("---")
-st.sidebar.info("May you live a long life!")
+st.sidebar.info("AI Health Assistant")
 
 # ---------------- HOME PAGE ----------------
 if page == "🏠 Home":
@@ -30,16 +30,15 @@ if page == "🏠 Home":
     st.markdown("---")
 
     st.write("""
-    Welcome to the Heart Disease Prediction .
+    Welcome to the Heart Disease Prediction.
 
-    Early detection of heart disease can:
-- Help prevent serious complications
-- Support timely medical intervention
-- Improve overall patient outcomes
-- Encourage preventive healthcare decisions
+    Early diagnosis helps in:
+- Preventive healthcare planning
+- Reducing health risks
+- Improving patient outcomes
+- Timely medical consultation
 
 ---
-
     """)
 
     st.success("Use the left sidebar to navigate through the application.")
@@ -58,8 +57,46 @@ elif page == "📖 About Project":
     - Assist in early diagnosis
     - Support medical decision-making
 
-***
-)
+    ### 🛠 Technologies Used
+    - Python
+    - Pandas & NumPy
+    - Scikit-learn
+    - Streamlit
+    """)
+
+# ---------------- MODEL INFO PAGE ----------------
+elif page == "🤖 Model Info":
+    st.title("🤖 Model Information")
+    st.markdown("---")
+
+    st.write("""
+    ### Algorithm Used:
+    Random Forest Classifier
+
+    ### Why Random Forest?
+    - High prediction accuracy
+    - Handles non-linear relationships
+    - Reduces overfitting
+    - Works well with structured medical data
+
+    The model is trained on 13 clinical features 
+    such as age, cholesterol, blood pressure, 
+    chest pain type, and more.
+    """)
+
+# ---------------- CONTACT PAGE ----------------
+elif page == "📩 Contact":
+    st.title("📩 Contact Information")
+    st.markdown("---")
+
+    st.write("""
+    👩‍💻 Developer: Priyanka  
+
+    This project is developed for academic and learning purposes.
+
+    📧 Email: your_email@example.com  
+    🌐 GitHub: Your GitHub Profile Link
+    """)
 
 # ---------------- PREDICTION PAGE ----------------
 elif page == "🔍 Prediction":
