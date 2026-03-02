@@ -88,7 +88,7 @@ elif page == "📩 Contact":
     st.markdown("---")
 
     st.write("""
-    👩‍💻 Developer: Og,s  
+    👩‍💻 Developer: Og's  
 
     This project is developed for academic and learning purposes.
 
